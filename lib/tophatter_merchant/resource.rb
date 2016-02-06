@@ -27,9 +27,9 @@ module TophatterMerchant
           raise BadContentTypeException.new, "The server didn't return JSON. You probably made a bad request." if response.headers[:content_type] == 'text/html; charset=utf-8'
           JSON.parse(response.body)
         rescue RestClient::Request::Unauthorized => e
-          raise UnauthorizedException.new, e.response
+          raise UnauthorizedException.new, JSON.parse(e.response)['message']
         rescue RestClient::BadRequest => e
-          raise BadRequestException.new, e.response
+          raise BadRequestException.new, JSON.parse(e.response)['message']
         rescue RestClient::ResourceNotFound
           raise NotFoundException.new, "The API path you requested doesn't exist."
         rescue RestClient::InternalServerError
@@ -38,7 +38,6 @@ module TophatterMerchant
       end
 
       def request(method:, url:, params:)
-        raise Exception, 'Please specify an access_token.' if TophatterMerchant.access_token.blank?
         RestClient::Request.new(method: method, url: url, payload: params.merge(access_token: TophatterMerchant.access_token), accept: :json)
       end
 
