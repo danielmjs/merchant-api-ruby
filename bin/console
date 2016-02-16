@@ -15,3 +15,4 @@ Pry.start
 
 # TophatterMerchant.api_path = 'http://localhost:3000/merchant_api/v1'
 # account = TophatterMerchant::Account.create(name: 'Foo Bar', email: 'foo@bar.com', password: 'ipipip')
+# account = TophatterMerchant::Account.authenticate(email: 'foo@bar.com', password: 'ipipip')
