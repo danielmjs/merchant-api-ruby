@@ -42,7 +42,7 @@ module TophatterMerchant
       end
 
       def path
-        API_PATH
+        TophatterMerchant.api_path
       end
 
     end

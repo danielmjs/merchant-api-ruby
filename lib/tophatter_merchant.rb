@@ -13,14 +13,20 @@ require File.dirname(__FILE__) + '/tophatter_merchant/variant'
 
 module TophatterMerchant
 
-  API_PATH = 'https://tophatter.com/merchant_api/v1'
-
   def self.access_token
     defined?(@@access_token) ? @@access_token : nil
   end
 
   def self.access_token=(token)
     @@access_token = token
+  end
+
+  def self.api_path
+    defined?(@@api_path) ? @@api_path : 'https://tophatter.com/merchant_api/v1'
+  end
+
+  def self.api_path=(path)
+    @@api_path = path
   end
 
 end

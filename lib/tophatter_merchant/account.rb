@@ -9,6 +9,16 @@ module TophatterMerchant
       Hashie::Mash.new response
     end
 
+    def self.create(name:, email:, password:)
+      Hashie::Mash.new post(url: "#{path}.json", params: {
+        user: {
+          name: name,
+          email: email,
+          password: password
+        }
+      })
+    end
+
     protected
 
     def self.path
