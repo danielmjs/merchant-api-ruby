@@ -7,11 +7,3 @@ require 'tophatter_merchant'
 require 'pry'
 
 Pry.start
-
-# 1. registration
-# 2. api key management
-# 3. basic product management
-# 4. basic order fulfillment
-
-# TophatterMerchant.api_path = 'http://localhost:3000/merchant_api/v1'
-# account = TophatterMerchant::Account.create(name: 'Foo Bar', email: 'foo@bar.com', password: 'ipipip')

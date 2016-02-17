@@ -2,11 +2,10 @@ module TophatterMerchant
   class Account < Resource
 
     def self.authenticate(email:, password:)
-      response = execute request(method: :post, url: "#{path}/authenticate.json", params: {
+      Hashie::Mash.new post(url: "#{path}/authenticate.json", params: {
         email: email,
         password: password
       })
-      Hashie::Mash.new response
     end
 
     def self.create(name:, email:, password:)
@@ -17,6 +16,22 @@ module TophatterMerchant
           password: password
         }
       })
+    end
+
+    def self.api_keys
+      get(url: "#{path}/api_keys.json").collect do |api_key|
+        Hashie::Mash.new(api_key)
+      end
+    end
+
+    def self.generate_api_key
+      Hashie::Mash.new post(url: "#{path}/generate_api_key.json")
+    end
+
+    def self.revoke_api_key(api_key_id:)
+      post(url: "#{path}/revoke_api_key.json", params: { api_key_id: api_key_id }).collect do |api_key|
+        Hashie::Mash.new(api_key)
+      end
     end
 
     protected
