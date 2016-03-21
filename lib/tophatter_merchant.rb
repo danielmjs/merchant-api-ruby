@@ -8,6 +8,7 @@ require File.dirname(__FILE__) + '/tophatter_merchant/image'
 require File.dirname(__FILE__) + '/tophatter_merchant/metadata'
 require File.dirname(__FILE__) + '/tophatter_merchant/order'
 require File.dirname(__FILE__) + '/tophatter_merchant/product'
+require File.dirname(__FILE__) + '/tophatter_merchant/support_ticket'
 require File.dirname(__FILE__) + '/tophatter_merchant/upload'
 require File.dirname(__FILE__) + '/tophatter_merchant/variant'
 
