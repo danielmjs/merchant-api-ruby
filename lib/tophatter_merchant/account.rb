@@ -11,12 +11,15 @@ module TophatterMerchant
         })
       end
 
-      def create(name:, email:, password:)
-        post(url: "#{path}.json", params: {
+      def create(name:, email:, password:, first_name:, last_name:, country:)
+        Hashie::Mash.new post(url: "#{path}.json", params: {
           user: {
             name: name,
             email: email,
-            password: password
+            password: password,
+            first_name: first_name,
+            last_name: last_name,
+            country: country
           }
         })
       end
