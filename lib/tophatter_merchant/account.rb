@@ -18,6 +18,12 @@ module TophatterMerchant
       })
     end
 
+    def self.update_seller_name(name:)
+      Hashie::Mash.new put(url: "#{path}/update_seller_name.json", params: {
+        name: name
+        })
+    end
+
     def self.api_keys
       get(url: "#{path}/api_keys.json").collect do |api_key|
         Hashie::Mash.new(api_key)
