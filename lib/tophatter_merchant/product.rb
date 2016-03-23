@@ -14,7 +14,7 @@ module TophatterMerchant
     end
 
     def self.retrieve(id)
-      Hashie::Mash.new get(url: "#{path}/retrieve.json", params: { user_product_id: id })
+      Hashie::Mash.new get(url: "#{path}/retrieve.json", params: { unique_id: id })
     end
 
     def self.create(data)
