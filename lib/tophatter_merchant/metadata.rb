@@ -1,6 +1,10 @@
 module TophatterMerchant
   class Metadata < Resource
 
+    def self.all
+      get(url: "#{path}.json")
+    end
+
     def self.conditions
       get(url: "#{path}/conditions.json")
     end
