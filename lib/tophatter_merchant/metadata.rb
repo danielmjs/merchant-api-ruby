@@ -24,6 +24,22 @@ module TophatterMerchant
     def self.carriers
       get(url: "#{path}/carriers.json")
     end
+    
+    def self.country_codes
+      get(url: "#{path}/country_codes.json")
+    end
+
+    def self.states
+      get(url: "#{path}/states.json")
+    end
+
+    def self.provinces
+      get(url: "#{path}/provinces.json")
+    end
+
+    def self.territories
+      get(url: "#{path}/territories.json")
+    end
 
     protected
 
