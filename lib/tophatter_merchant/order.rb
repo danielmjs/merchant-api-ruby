@@ -11,6 +11,10 @@ module TophatterMerchant
       end
     end
 
+    def self.fulfill(id: nil, tracking_number: nil, tracking_type: nil, shipped_at: nil)
+      post(url: "#{path}/#{id}/fulfill.json", params: { tracking_number: tracking_number, tracking_type: tracking_type, shipped_at: shipped_at })
+    end
+
     protected
 
     def self.path
