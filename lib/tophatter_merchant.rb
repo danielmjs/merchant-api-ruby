@@ -10,6 +10,8 @@ require File.dirname(__FILE__) + '/tophatter_merchant/order'
 require File.dirname(__FILE__) + '/tophatter_merchant/product'
 require File.dirname(__FILE__) + '/tophatter_merchant/upload'
 require File.dirname(__FILE__) + '/tophatter_merchant/variant'
+require File.dirname(__FILE__) + '/tophatter_merchant/payouts'
+
 
 module TophatterMerchant
 
