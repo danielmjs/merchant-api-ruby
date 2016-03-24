@@ -8,6 +8,7 @@ require File.dirname(__FILE__) + '/tophatter_merchant/image'
 require File.dirname(__FILE__) + '/tophatter_merchant/metadata'
 require File.dirname(__FILE__) + '/tophatter_merchant/order'
 require File.dirname(__FILE__) + '/tophatter_merchant/product'
+require File.dirname(__FILE__) + '/tophatter_merchant/product_variation'
 require File.dirname(__FILE__) + '/tophatter_merchant/support_ticket'
 require File.dirname(__FILE__) + '/tophatter_merchant/upload'
 require File.dirname(__FILE__) + '/tophatter_merchant/variant'
@@ -23,7 +24,8 @@ module TophatterMerchant
   end
 
   def self.api_path
-    defined?(@@api_path) ? @@api_path : 'https://tophatter.com/merchant_api/v1'
+    # defined?(@@api_path) ? @@api_path : 'https://tophatter.com/merchant_api/v1'
+    defined?(@@api_path) ? @@api_path : 'http://localhost/merchant_api/v1'
   end
 
   def self.api_path=(path)

@@ -1,12 +1,8 @@
 module TophatterMerchant
-  class Product < Resource
+  class ProductVariation < Resource
 
     def self.schema
       get(url: "#{path}/schema.json")
-    end
-
-    def self.all(page: 1, per_page: 50)
-      get(url: "#{path}.json", params: { page: page, per_page: per_page })
     end
 
     def self.retrieve(id)
@@ -18,17 +14,13 @@ module TophatterMerchant
     end
 
     def self.update(id, data)
-      post(url: "#{path}/update.json", params: data.merge(user_product_id: id))
-    end
-
-    def self.upload(file)
-      post(url: "#{path}/upload.json", params: { data: file })
+      post(url: "#{path}/update.json", params: data.merge(unique_id: id))
     end
 
     protected
 
     def self.path
-      super + '/products'
+      super + '/variations'
     end
 
   end
