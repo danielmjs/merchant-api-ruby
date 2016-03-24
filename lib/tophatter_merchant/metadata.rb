@@ -17,6 +17,10 @@ module TophatterMerchant
       get(url: "#{path}/countries.json")
     end
 
+    def self.carriers
+      get(url: "#{path}/carriers.json")
+    end
+
     protected
 
     def self.path
