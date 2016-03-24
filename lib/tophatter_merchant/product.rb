@@ -18,7 +18,7 @@ module TophatterMerchant
     end
 
     def self.update(id, data)
-      post(url: "#{path}/update.json", params: data.merge(user_product_id: id))
+      post(url: "#{path}/update.json", params: data.merge(unique_id: id))
     end
 
     def self.upload(file)
