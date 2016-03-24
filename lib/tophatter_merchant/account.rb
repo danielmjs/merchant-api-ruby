@@ -12,7 +12,7 @@ module TophatterMerchant
       end
 
       def create(name:, email:, password:, first_name:, last_name:, country:)
-        Hashie::Mash.new post(url: "#{path}.json", params: {
+        post(url: "#{path}.json", params: {
           user: {
             name: name,
             email: email,
@@ -25,9 +25,12 @@ module TophatterMerchant
       end
 
       # @TODO: We can just use .update for this.
-      def update_seller_name(name:)
+      def update_seller_name(name:, first_name:, last_name:, country:)
         put(url: "#{path}/update_seller_name.json", params: {
-          name: name
+          name: name,
+          first_name: first_name,
+          last_name: last_name,
+          country: country
         })
       end
 
