@@ -39,6 +39,13 @@ module TophatterMerchant
       })
     end
 
+    def self.unsubscribe(account:, digest_frequency:)
+      Hashie::Mash.new put(url: "#{path}/unsubscribe.json", params: {
+        account: account,
+        digest_frequency: digest_frequency
+      })
+    end
+
     def self.api_keys
       get(url: "#{path}/api_keys.json").collect do |api_key|
         Hashie::Mash.new(api_key)
