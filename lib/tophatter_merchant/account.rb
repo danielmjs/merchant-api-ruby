@@ -30,6 +30,15 @@ module TophatterMerchant
       })
     end
 
+    def self.change_password(account:, password:, password_confirmation:, reset_secret_token:)
+      Hashie::Mash.new put(url: "#{path}/change_password.json", params: {
+        account: account,
+        password: password,
+        password_confirmation: password_confirmation,
+        reset_secret_token: reset_secret_token
+      })
+    end
+
     def self.api_keys
       get(url: "#{path}/api_keys.json").collect do |api_key|
         Hashie::Mash.new(api_key)
