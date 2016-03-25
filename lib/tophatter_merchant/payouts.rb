@@ -21,7 +21,7 @@ module TophatterMerchant
     end
 
     def self.set_bank_account(account_name, account_type, routing_number, account_number, first_name, last_name)
-        Hashie:Mash.new post(url: "#{path}/set_bank_account", params:{
+        Hashie::Mash.new post(url: "#{path}/set_bank_account", params:{
           account_name: account_name,
           account_type: account_type,
           routing_number: routing_number,
