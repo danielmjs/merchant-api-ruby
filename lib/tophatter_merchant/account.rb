@@ -46,6 +46,10 @@ module TophatterMerchant
       })
     end
 
+    def self.cancel(account:)
+      Hashie::Mash.new post(url: "#{path}/cancel.json", params: { account: account })
+    end
+
     def self.api_keys
       get(url: "#{path}/api_keys.json").collect do |api_key|
         Hashie::Mash.new(api_key)
