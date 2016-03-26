@@ -1,25 +1,38 @@
 module TophatterMerchant
   class ApiKey < Resource
 
-    def self.all
-      get(url: "#{path}.json")
+    attr_accessor :id, :access_token
+
+    class << self
+
+      def schema
+        get(url: "#{path}/schema.json")
+      end
+
+      def all
+        response = get(url: "#{path}.json")
+        response.map { |hash| ApiKey.new(hash) }
+      end
+
+      def retrieve(id)
+        ApiKey.new get(url: "#{path}/#{id}.json")
+      end
+
+      def create
+        ApiKey.new post(url: "#{path}.json")
+      end
+
+      def destroy(id)
+        response = delete(url: "#{path}/#{id}.json")
+        response.map { |hash| ApiKey.new(hash) }
+      end
+
+      protected
+
+      def path
+        super + '/api_keys'
+      end
+
     end
-
-    def self.create
-      post(url: "#{path}.json")
-    end
-
-    def self.destroy(api_key_id:)
-      delete(url: "#{path}/revoke_api_key.json", params: {
-        api_key_id: api_key_id
-      })
-    end
-
-    protected
-
-    def self.path
-      super + '/api_keys'
-    end
-
   end
 end

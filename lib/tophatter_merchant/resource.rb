@@ -1,10 +1,49 @@
+require 'active_model'
+
 module TophatterMerchant
   class Resource
 
     include ActiveModel::Model
-    extend ActiveModel::Naming
+
+    def self.attr_accessor(*vars)
+      attributes!(*vars)
+      super(*vars)
+    end
+
+    def initialize(hash)
+      self.attributes = hash
+    end
+
+    def attributes=(hash)
+      hash.each do |key, value|
+        if respond_to?(key)
+          self.class.attributes!(key)
+          send("#{key}=", value)
+        end
+      end
+    end
+
+    def attributes
+      self.class.attributes
+    end
+
+    def to_h
+      attributes.collect { |key| [key, send(key)] }.compact.to_h
+    end
+
+    private
+
+    def self.attributes
+      @attributes || []
+    end
+
+    def self.attributes!(*vars)
+      @attributes ||= []
+      @attributes.concat(vars.map(&:to_s))
+    end
 
     class << self
+
       protected
 
       def get(url:, params: {})
@@ -59,6 +98,7 @@ module TophatterMerchant
       def path
         TophatterMerchant.api_path
       end
+
     end
   end
 end

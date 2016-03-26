@@ -13,8 +13,6 @@ require File.dirname(__FILE__) + '/tophatter_merchant/metadata'
 require File.dirname(__FILE__) + '/tophatter_merchant/order'
 require File.dirname(__FILE__) + '/tophatter_merchant/product'
 require File.dirname(__FILE__) + '/tophatter_merchant/product_variation'
-require File.dirname(__FILE__) + '/tophatter_merchant/support_ticket'
-require File.dirname(__FILE__) + '/tophatter_merchant/upload'
 
 module TophatterMerchant
 

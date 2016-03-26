@@ -7,6 +7,13 @@ require 'hashie' # This should be handled by bundler.
 
 require 'tophatter_merchant'
 
+require 'awesome_print'
 require 'pry'
 
+TophatterMerchant.api_path = 'http://localhost/merchant_api/v1'
+account = TophatterMerchant::Account.authenticate(email: 'megatron@autobot.com', password: 'ipipip')
+TophatterMerchant.access_token = account['access_token']
+puts "Welcome, #{account['name']}"
+
+Pry.config.color = false
 Pry.start

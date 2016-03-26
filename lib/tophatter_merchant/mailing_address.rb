@@ -1,52 +1,43 @@
 module TophatterMerchant
   class MailingAddress < Resource
 
-    KEYS = [:id, :user_id, :braintree_address_id, :easypost_id, :name, :company, :address1, :address2, :city, :state, :zip, :country, :phone, :latitude, :longitude, :fingerprint, :return_mailing_address, :data, :valid_address_at, :deleted_at]
+    attr_accessor :id, :name, :address1, :address2, :city, :state, :zip, :country, :return_mailing_address
 
-    attr_accessor :id, :user_id, :braintree_address_id, :easypost_id, :name, :company, :address1, :address2, :city, :state, :zip, :country, :phone, :latitude, :longitude, :fingerprint, :return_mailing_address, :data, :valid_address_at, :deleted_at
+    class << self
 
-    def initialize(attributes)
-      attributes.each { |k, v| send("#{k}=", v) }
-    end
-
-    def self.index(account:)
-      get(
-        url: "#{path}.json",
-        params: { access_token: account.access_token }
-      ).map do |mailing_address|
-        MailingAddress.new mailing_address.slice(*KEYS.map(&:to_s))
+      def schema
+        get(url: "#{path}/schema.json")
       end
-    end
 
-    def self.create(account:, address_params:)
-      MailingAddress.new post(
-        url: "#{path}.json",
-        params: address_params.merge(access_token: account.access_token)
-      ).slice(*KEYS.map(&:to_s))
-    end
-
-    def self.update(account:, address_params:)
-      id = address_params.delete(:id)
-      MailingAddress.new put(
-        url: "#{path}/#{id}.json",
-        params: address_params.merge(access_token: account.access_token)
-      ).slice(*KEYS.map(&:to_s))
-    end
-
-    def self.destroy(account:, id:)
-      delete(
-        url: "#{path}/#{id}.json",
-        params: { access_token: account.access_token }
-      ).map do |mailing_address|
-        MailingAddress.new mailing_address.slice(*KEYS.map(&:to_s))
+      def all
+        response = get(url: "#{path}.json")
+        response.map { |hash| MailingAddress.new(hash) }
       end
+
+      def retrieve(id)
+        MailingAddress.new get(url: "#{path}/#{id}.json")
+      end
+
+      # TophatterMerchant::MailingAddress.create(name: 'Chris Estreich', address1: '201 Valley Street', city: 'Los Altos', state: 'CA', zip: 94022, country: 'USA')
+      def create(params)
+        MailingAddress.new post(url: "#{path}.json", params: params)
+      end
+
+      def update(id, params)
+        MailingAddress.new put(url: "#{path}/#{id}.json", params: params)
+      end
+
+      def destroy(id)
+        response = delete(url: "#{path}/#{id}.json")
+        response.map { |hash| MailingAddress.new(hash) }
+      end
+
+      protected
+
+      def path
+        super + '/mailing_addresses'
+      end
+
     end
-
-    protected
-
-    def self.path
-      super + '/mailing_addresses'
-    end
-
   end
 end

@@ -1,26 +1,32 @@
 module TophatterMerchant
   class ProductVariation < Resource
 
-    def self.schema
-      get(url: "#{path}/schema.json")
-    end
+    attr_accessor :unique_id, :size, :color, :quantity
 
-    def self.retrieve(id)
-      get(url: "#{path}/retrieve.json", params: { unique_id: id })
-    end
+    class << self
 
-    def self.create(data)
-      post(url: "#{path}.json", params: data)
-    end
+      def schema
+        get(url: "#{path}/schema.json")
+      end
 
-    def self.update(id, data)
-      post(url: "#{path}/update.json", params: data.merge(unique_id: id))
-    end
+      def retrieve(unique_id)
+        get(url: "#{path}/retrieve.json", params: { unique_id: unique_id })
+      end
 
-    protected
+      def create(params)
+        post(url: "#{path}.json", params: params)
+      end
 
-    def self.path
-      super + '/variations'
+      def update(unique_id, data)
+        post(url: "#{path}/update.json", params: params.merge(unique_id: unique_id))
+      end
+
+      protected
+
+      def path
+        super + '/variations'
+      end
+
     end
 
   end
