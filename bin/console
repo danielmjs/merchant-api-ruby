@@ -1,9 +1,12 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
+
 require 'rest-client' # This should be handled by bundler.
 require 'hashie' # This should be handled by bundler.
+
 require 'tophatter_merchant'
+
 require 'pry'
 
 Pry.start

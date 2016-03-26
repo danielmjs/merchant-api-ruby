@@ -1,7 +1,10 @@
 module TophatterMerchant
   class Resource
-    class << self
 
+    include ActiveModel::Model
+    extend ActiveModel::Naming
+
+    class << self
       protected
 
       def get(url:, params: {})
@@ -56,7 +59,6 @@ module TophatterMerchant
       def path
         TophatterMerchant.api_path
       end
-
     end
   end
 end
