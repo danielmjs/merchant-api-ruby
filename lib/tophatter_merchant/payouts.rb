@@ -31,6 +31,10 @@ module TophatterMerchant
           })
     end
 
+    def self.payoneer_signup_url(callback_url)
+      Hashie::Mash.new get(url: "#{path}/payoneer_signup_url?callback_url=#{callback_url}")
+    end
+
     def self.path
       super + '/payouts'
     end

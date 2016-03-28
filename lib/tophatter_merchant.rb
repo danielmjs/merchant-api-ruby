@@ -24,7 +24,7 @@ module TophatterMerchant
   end
 
   def self.api_path
-    defined?(@@api_path) ? @@api_path : 'https://tophatter.com/merchant_api/v1'
+    defined?(@@api_path) ? @@api_path : 'http://localhost/merchant_api/v1'
   end
 
   def self.api_path=(path)
