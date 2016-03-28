@@ -1,15 +1,20 @@
 module TophatterMerchant
   class Image < Resource
 
-    def self.create(file)
-      Hashie::Mash.new post(url: "#{path}.json", params: { data: file })
+    attr_accessor :image_id
+
+    class << self
+
+      def create(file)
+        Hashie::Mash.new post(url: "#{path}.json", params: { data: file })
+      end
+
+      protected
+
+      def path
+        super + '/images'
+      end
+
     end
-
-    protected
-
-    def self.path
-      super + '/images'
-    end
-
   end
 end
