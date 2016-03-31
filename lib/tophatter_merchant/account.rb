@@ -24,25 +24,17 @@ module TophatterMerchant
         })
       end
 
-      # @TODO: We can just use .update for this.
-      def update_seller_name(name:, first_name:, last_name:, country:)
-        put(url: "#{path}/update_seller_name.json", params: {
-          name: name,
-          first_name: first_name,
-          last_name: last_name,
-          country: country
-        })
-      end
-
-      def update(account:, name:, email:, phone_number:, country:, time_zone:)
+      def update(account:, name:, first_name:, last_name:, email:, phone_number:, country:, time_zone:)
         Hashie::Mash.new put(url: "#{path}/#{account.access_token}.json", params: {
           user: {
             name: name,
+            first_name: first_name,
+            last_name: last_name,
             email: email,
             phone_number: phone_number,
             country: country,
             time_zone: time_zone
-          }
+          }.compact
         })
       end
 
