@@ -1,12 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-
-require 'rest-client' # This should be handled by bundler.
-require 'hashie' # This should be handled by bundler.
-
+require 'rest-client'
 require 'tophatter_merchant'
-
 require 'awesome_print'
 require 'pry'
 

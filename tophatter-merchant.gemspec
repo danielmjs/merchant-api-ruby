@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '~> 2.0'
 
   s.add_dependency 'rest-client'
-  s.add_dependency 'hashie'
   s.add_dependency 'activemodel'
 
   s.post_install_message = 'Documentation is available at: https://tophatter.readme.io/'
