@@ -1,61 +1,42 @@
 module TophatterMerchant
   class Account < Resource
 
-    attr_accessor :email, :name, :access_token
+    attr_accessor :access_token, :first_name, :last_name, :store_name, :email, :country, :time_zone
 
     class << self
+
+      # ap TophatterMerchant::Account.schema
+      def schema
+        get(url: "#{path}/schema.json")
+      end
+
+      # ap TophatterMerchant::Account.authenticate(email: 'megatron@autobot.com', password: 'ipipip').to_h
       def authenticate(email:, password:)
-        post(url: "#{path}/authenticate.json", params: {
+        Account.new post(url: "#{path}/authenticate.json", params: {
           email: email,
           password: password
         })
       end
 
-      def create(name:, email:, password:, first_name:, last_name:, country:)
-        post(url: "#{path}.json", params: {
-          user: {
-            name: name,
-            email: email,
-            password: password,
-            first_name: first_name,
-            last_name: last_name,
-            country: country
-          }
+      # ap TophatterMerchant::Account.create(first_name: 'Foo', last_name: 'Bar', store_name: 'Foo Bar, Inc', email: 'foo@bar.com', password: 'ipipip').to_h
+      def create(first_name:, last_name:, store_name:, email:, password:)
+        Account.new post(url: "#{path}.json", params: {
+          first_name: first_name,
+          last_name: last_name,
+          store_name: store_name,
+          email: email,
+          password: password
         })
       end
 
-      def update(account:, name:, first_name:, last_name:, email:, phone_number:, country:, time_zone:)
-        Hashie::Mash.new put(url: "#{path}/#{account.access_token}.json", params: {
-          user: {
-            name: name,
-            first_name: first_name,
-            last_name: last_name,
-            email: email,
-            phone_number: phone_number,
-            country: country,
-            time_zone: time_zone
-          }.compact
-        })
-      end
-
-      def change_password(account:, password:, password_confirmation:, reset_secret_token:)
-        Hashie::Mash.new put(url: "#{path}/change_password.json", params: {
-          account: account,
-          password: password,
-          password_confirmation: password_confirmation,
-          reset_secret_token: reset_secret_token
-        })
-      end
-
-      def unsubscribe(account:, digest_frequency:)
-        Hashie::Mash.new put(url: "#{path}/unsubscribe.json", params: {
-          account: account,
-          digest_frequency: digest_frequency
-        })
-      end
-
-      def cancel(account:)
-        Hashie::Mash.new post(url: "#{path}/cancel.json", params: { account: account })
+      # Change first & last name:
+      # ap TophatterMerchant::Account.update(first_name: 'Mega', last_name: 'Tron').to_h
+      # Change password:
+      # ap TophatterMerchant::Account.update(password: 'qwer1234').to_h
+      # ap TophatterMerchant::Account.authenticate(email: 'megatron@autobot.com', password: 'qwer1234').to_h
+      # ap TophatterMerchant::Account.update(password: 'ipipip').to_h
+      def update(params)
+        Account.new post(url: "#{path}/update.json", params: params)
       end
 
       protected
@@ -63,6 +44,7 @@ module TophatterMerchant
       def path
         super + '/account'
       end
+
     end
   end
 end

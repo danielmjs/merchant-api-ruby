@@ -90,8 +90,12 @@ module TophatterMerchant
       end
 
       def request(method:, url:, params:)
-        payload = params.merge(access_token: TophatterMerchant.access_token)
-        # raise Exception, payload[:product_variations].inspect
+        payload = if TophatterMerchant.access_token.present?
+          params.merge(access_token: TophatterMerchant.access_token)
+        else
+          params
+        end
+
         RestClient::Request.new(method: method, url: url, payload: payload, accept: :json)
       end
 
