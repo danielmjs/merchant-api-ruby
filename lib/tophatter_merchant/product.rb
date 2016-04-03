@@ -86,7 +86,7 @@ module TophatterMerchant
         Product.new post(url: "#{path}.json", params: data)
       end
 
-      # ap TophatterMerchant::Product.update('FOOBAR', { buy_now_price: 11 }).to_h
+      # ap TophatterMerchant::Product.update('FOOBAR', buy_now_price: 11).to_h
       def update(id, data)
         Product.new post(url: "#{path}/update.json", params: data.merge(unique_id: id))
       end
