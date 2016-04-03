@@ -54,35 +54,41 @@ module TophatterMerchant
       self.estimated_days_to_ship = 3
       self.estimated_days_to_deliver = 10
       self.product_variations = {
-        '0': { size: nil, color: 'Red', unique_id: 'FOOBAR-R', quantity: 10 }.with_indifferent_access,
-        '1': { size: nil, color: 'Blue', unique_id: 'FOOBAR-B', quantity: 10 }.with_indifferent_access,
-        '2': { size: nil, color: 'Pink', unique_id: 'FOOBAR-P', quantity: 10 }.with_indifferent_access
+        '0': { size: nil, color: 'Red', unique_id: 'FOOBAR-R', quantity: 10 },
+        '1': { size: nil, color: 'Blue', unique_id: 'FOOBAR-B', quantity: 10 },
+        '2': { size: nil, color: 'Pink', unique_id: 'FOOBAR-P', quantity: 10 }
       }
+      self.primary_image = 'https://img0.etsystatic.com/101/0/7856452/il_fullxfull.882030160_r0tn.jpg'
+      self.extra_images = ['https://img1.etsystatic.com/104/0/7856452/il_fullxfull.881791367_26vj.jpg']
+      self
     end
 
     class << self
+
+      # ap TophatterMerchant::Product.schema
       def schema
         get(url: "#{path}/schema.json")
       end
 
+      # ap TophatterMerchant::Product.all.map(&:to_h)
       def all(page: 1, per_page: 50)
-        get(url: "#{path}.json", params: { page: page, per_page: per_page })
+        get(url: "#{path}.json", params: { page: page, per_page: per_page }).map do |hash|
+          Product.new(hash)
+        end
       end
 
       def retrieve(id)
-        get(url: "#{path}/retrieve.json", params: { unique_id: id })
+        Product.new get(url: "#{path}/retrieve.json", params: { unique_id: id })
       end
 
+      # ap TophatterMerchant::Product.create(TophatterMerchant::Product.new({}).fill!.to_h).to_h
       def create(data)
-        post(url: "#{path}.json", params: data)
+        Product.new post(url: "#{path}.json", params: data)
       end
 
+      # ap TophatterMerchant::Product.update('FOOBAR', { buy_now_price: 11 }).to_h
       def update(id, data)
-        post(url: "#{path}/update.json", params: data.merge(unique_id: id))
-      end
-
-      def upload(file)
-        post(url: "#{path}/upload.json", params: { data: file })
+        Product.new post(url: "#{path}/update.json", params: data.merge(unique_id: id))
       end
 
       protected
@@ -90,6 +96,7 @@ module TophatterMerchant
       def path
         super + '/products'
       end
+
     end
   end
 end
