@@ -34,6 +34,10 @@ module TophatterMerchant
         })
       end
 
+      def unfulfill(id)
+        post(url: "#{path}/#{id}/unfulfill.json")
+      end
+
       protected
 
       def path
