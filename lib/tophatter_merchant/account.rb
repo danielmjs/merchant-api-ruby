@@ -18,15 +18,14 @@ module TophatterMerchant
         })
       end
 
-      # ap TophatterMerchant::Account.create(first_name: 'Foo', last_name: 'Bar', store_name: 'Foo Bar, Inc', email: 'foo@bar.com', password: 'ipipip').to_h
-      def create(first_name:, last_name:, store_name:, email:, password:)
-        Account.new post(url: "#{path}.json", params: {
-          first_name: first_name,
-          last_name: last_name,
-          store_name: store_name,
-          email: email,
-          password: password
-        })
+      # ap TophatterMerchant::Account.me.to_h
+      def me
+        Account.new get(url: "#{path}/me.json")
+      end
+
+      # ap TophatterMerchant::Account.create(first_name: 'Foo', last_name: 'Bar', store_name: 'Foo Bar, Inc', email: 'foo@bar.com', password: 'ipipip', country: 'United States', time_zone: 'Pacific Time (US & Canada)').to_h
+      def create(data)
+        Account.new post(url: "#{path}.json", params: data)
       end
 
       # Change first & last name:
@@ -35,8 +34,8 @@ module TophatterMerchant
       # ap TophatterMerchant::Account.update(password: 'qwer1234').to_h
       # ap TophatterMerchant::Account.authenticate(email: 'megatron@autobot.com', password: 'qwer1234').to_h
       # ap TophatterMerchant::Account.update(password: 'ipipip').to_h
-      def update(params)
-        Account.new post(url: "#{path}/update.json", params: params)
+      def update(data)
+        Account.new post(url: "#{path}/update.json", params: data)
       end
 
       protected
