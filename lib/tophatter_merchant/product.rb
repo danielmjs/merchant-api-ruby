@@ -24,7 +24,7 @@ module TophatterMerchant
     end
 
     def root_category
-      product_category.split(' | ').first
+      product_category.to_s.split(' | ').first
     end
 
     def stored=(boolean)
