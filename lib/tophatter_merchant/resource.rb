@@ -31,6 +31,10 @@ module TophatterMerchant
       attributes.collect { |key| [key, send(key)] }.compact.to_h
     end
 
+    def persisted?
+      id.present?
+    end
+
     private
 
     def self.attributes
