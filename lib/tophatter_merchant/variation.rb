@@ -3,6 +3,10 @@ module TophatterMerchant
 
     attr_accessor :unique_id, :size, :color, :quantity
 
+    def id
+      unique_id
+    end
+
     class << self
 
       # ap TophatterMerchant::Variation.schema

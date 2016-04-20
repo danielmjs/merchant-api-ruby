@@ -10,33 +10,12 @@ module TophatterMerchant
     attr_accessor :ships_from, :estimated_days_to_ship, :estimated_days_to_deliver
     attr_accessor :primary_image, :extra_images
 
-    def product_variations=(array)
-      # https://github.com/rest-client/rest-client/issues/59
-      if array.is_a?(Hash)
-        @product_variations = array
-      elsif array.is_a?(Array)
-        @product_variations = (0..array.length - 1).zip(array).to_h
-      end
-    end
-
     def id
       unique_id
     end
 
     def root_category
       product_category.to_s.split(' | ').first
-    end
-
-    def stored=(boolean)
-      @stored = boolean
-    end
-
-    def stored
-      @stored
-    end
-
-    def persisted?
-      stored.present?
     end
 
     def fill!
@@ -53,11 +32,11 @@ module TophatterMerchant
       self.ships_from = 'China'
       self.estimated_days_to_ship = 3
       self.estimated_days_to_deliver = 10
-      self.product_variations = {
-        '0': { size: nil, color: 'Red', unique_id: 'FOOBAR-R', quantity: 10 },
-        '1': { size: nil, color: 'Blue', unique_id: 'FOOBAR-B', quantity: 10 },
-        '2': { size: nil, color: 'Pink', unique_id: 'FOOBAR-P', quantity: 10 }
-      }
+      self.product_variations = [
+        { size: nil, color: 'Red', unique_id: 'FOOBAR-R', quantity: 10 }.with_indifferent_access,
+        { size: nil, color: 'Blue', unique_id: 'FOOBAR-B', quantity: 10 }.with_indifferent_access,
+        { size: nil, color: 'Pink', unique_id: 'FOOBAR-P', quantity: 10 }.with_indifferent_access
+      ]
       self.primary_image = 'https://img0.etsystatic.com/101/0/7856452/il_fullxfull.882030160_r0tn.jpg'
       self.extra_images = ['https://img1.etsystatic.com/104/0/7856452/il_fullxfull.881791367_26vj.jpg']
       self
