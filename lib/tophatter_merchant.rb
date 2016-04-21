@@ -33,4 +33,12 @@ module TophatterMerchant
     @@api_path = path
   end
 
+  def self.api_locale
+    defined?(@@api_locale) ? @@api_locale : nil
+  end
+
+  def self.api_locale=(locale)
+    @@api_locale = locale
+  end
+
 end

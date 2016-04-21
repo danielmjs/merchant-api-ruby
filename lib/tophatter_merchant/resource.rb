@@ -1,4 +1,5 @@
 require 'active_model'
+require 'uri'
 
 module TophatterMerchant
   class Resource
@@ -67,6 +68,7 @@ module TophatterMerchant
       end
 
       def execute(request)
+        binding.pry
         begin
           puts "#{request.method.upcase} #{request.url} #{request.payload.inspect}"
           response = request.execute
@@ -104,7 +106,14 @@ module TophatterMerchant
       end
 
       def path
-        TophatterMerchant.api_path
+        full_path = if TophatterMerchant.api_locale.present?
+          uri = URI.parse(TophatterMerchant.api_path)
+          path = uri.path
+          uri.path = "/#{TophatterMerchant.api_locale.to_s}#{path}"
+          uri.to_s
+        else
+          TophatterMerchant.api_path
+        end
       end
 
     end
