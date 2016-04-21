@@ -68,7 +68,6 @@ module TophatterMerchant
       end
 
       def execute(request)
-        binding.pry
         begin
           puts "#{request.method.upcase} #{request.url} #{request.payload.inspect}"
           response = request.execute
