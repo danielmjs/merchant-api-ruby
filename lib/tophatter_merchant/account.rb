@@ -1,7 +1,7 @@
 module TophatterMerchant
   class Account < Resource
 
-    attr_accessor :access_token, :first_name, :last_name, :store_name, :email, :country, :time_zone
+    attr_accessor :access_token, :first_name, :last_name, :store_name, :email, :country, :time_zone, :country_local
 
     class << self
 
