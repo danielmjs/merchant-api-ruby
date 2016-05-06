@@ -1,7 +1,7 @@
 module TophatterMerchant
   class Order < Resource
 
-    attr_accessor :id, :product_name, :product_unique_id, :variation_unique_id
+    attr_accessor :id, :product_name, :product_identifier, :variation_identifier
     attr_accessor :customer_name, :address1, :address2, :city, :state, :postal_code, :country
     attr_accessor :carrier, :tracking_number
 

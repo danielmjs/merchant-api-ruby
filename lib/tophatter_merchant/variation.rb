@@ -1,10 +1,10 @@
 module TophatterMerchant
   class Variation < Resource
 
-    attr_accessor :unique_id, :size, :color, :quantity
+    attr_accessor :identifier, :size, :color, :quantity
 
     def id
-      unique_id
+      identifier
     end
 
     class << self
@@ -15,8 +15,8 @@ module TophatterMerchant
       end
 
       # ap TophatterMerchant::Variation.retrieve('FOOBAR-R').to_h
-      def retrieve(unique_id)
-        Variation.new get(url: "#{path}/retrieve.json", params: { unique_id: unique_id })
+      def retrieve(identifier)
+        Variation.new get(url: "#{path}/retrieve.json", params: { identifier: identifier })
       end
 
       def create(params)
@@ -26,8 +26,8 @@ module TophatterMerchant
       end
 
       # ap TophatterMerchant::Variation.update('FOOBAR-R', quantity: 100).to_h
-      def update(unique_id, data)
-        Variation.new post(url: "#{path}/update.json", params: data.merge(unique_id: unique_id))
+      def update(identifier, data)
+        Variation.new post(url: "#{path}/update.json", params: data.merge(identifier: identifier))
       end
 
       protected

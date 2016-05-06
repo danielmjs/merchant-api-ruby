@@ -1,7 +1,7 @@
 module TophatterMerchant
   class Product < Resource
 
-    attr_accessor :unique_id
+    attr_accessor :identifier
     attr_accessor :title, :description, :product_condition
     attr_accessor :product_category
     attr_accessor :product_variations
@@ -11,7 +11,7 @@ module TophatterMerchant
     attr_accessor :primary_image, :extra_images
 
     def id
-      unique_id
+      identifier
     end
 
     def root_category
@@ -19,7 +19,7 @@ module TophatterMerchant
     end
 
     def fill!
-      self.unique_id = 'FOOBAR'
+      self.identifier = 'FOOBAR'
       self.title = 'Foo'
       self.description = 'Bar'
       self.product_condition = 'New'
@@ -33,9 +33,9 @@ module TophatterMerchant
       self.estimated_days_to_ship = 3
       self.estimated_days_to_deliver = 10
       self.product_variations = [
-        { size: nil, color: 'Red', unique_id: 'FOOBAR-R', quantity: 10 }.with_indifferent_access,
-        { size: nil, color: 'Blue', unique_id: 'FOOBAR-B', quantity: 10 }.with_indifferent_access,
-        { size: nil, color: 'Pink', unique_id: 'FOOBAR-P', quantity: 10 }.with_indifferent_access
+        { size: nil, color: 'Red', identifier: 'FOOBAR-R', quantity: 10 }.with_indifferent_access,
+        { size: nil, color: 'Blue', identifier: 'FOOBAR-B', quantity: 10 }.with_indifferent_access,
+        { size: nil, color: 'Pink', identifier: 'FOOBAR-P', quantity: 10 }.with_indifferent_access
       ]
       self.primary_image = 'https://img0.etsystatic.com/101/0/7856452/il_fullxfull.882030160_r0tn.jpg'
       self.extra_images = ['https://img1.etsystatic.com/104/0/7856452/il_fullxfull.881791367_26vj.jpg']
@@ -57,7 +57,7 @@ module TophatterMerchant
       end
 
       def retrieve(id)
-        Product.new get(url: "#{path}/retrieve.json", params: { unique_id: id })
+        Product.new get(url: "#{path}/retrieve.json", params: { identifier: id })
       end
 
       # ap TophatterMerchant::Product.create(TophatterMerchant::Product.new({}).fill!.to_h).to_h
@@ -67,7 +67,7 @@ module TophatterMerchant
 
       # ap TophatterMerchant::Product.update('FOOBAR', buy_now_price: 11).to_h
       def update(id, data)
-        Product.new post(url: "#{path}/update.json", params: data.merge(unique_id: id))
+        Product.new post(url: "#{path}/update.json", params: data.merge(identifier: id))
       end
 
       protected
