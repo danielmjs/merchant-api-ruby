@@ -3,6 +3,10 @@ module TophatterMerchant
 
     attr_accessor :access_token, :first_name, :last_name, :store_name, :email, :country, :time_zone
 
+    def id
+      email
+    end
+
     class << self
 
       # ap TophatterMerchant::Account.schema
