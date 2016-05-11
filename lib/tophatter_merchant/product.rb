@@ -9,6 +9,7 @@ module TophatterMerchant
     attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price, :shipping_price, :shipping_price_other
     attr_accessor :ships_from, :estimated_days_to_ship, :estimated_days_to_deliver
     attr_accessor :primary_image, :extra_images
+    attr_accessor :disabled
 
     def id
       identifier
@@ -68,6 +69,16 @@ module TophatterMerchant
       # ap TophatterMerchant::Product.update('FOOBAR', buy_now_price: 11).to_h
       def update(id, data)
         Product.new post(url: "#{path}/update.json", params: data.merge(identifier: id))
+      end
+
+      # ap TophatterMerchant::Product.disable('FOOBAR').to_h
+      def disable(id)
+        Product.new post(url: "#{path}/disable.json", params: { identifier: id })
+      end
+      
+      # ap TophatterMerchant::Product.enable('FOOBAR').to_h
+      def enable(id)
+        Product.new post(url: "#{path}/enable.json", params: { identifier: id })
       end
 
       protected
