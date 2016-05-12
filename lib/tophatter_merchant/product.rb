@@ -20,7 +20,6 @@ module TophatterMerchant
     end
 
     def fill!
-      self.identifier = 'FOOBAR'
       self.title = 'Foo'
       self.description = 'Bar'
       self.product_condition = 'New'
