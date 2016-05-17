@@ -8,7 +8,7 @@ module TophatterMerchant
     # attr_accessor :product_brand, :product_model
     attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price, :shipping_price, :shipping_price_other
     attr_accessor :ships_from, :estimated_days_to_ship, :estimated_days_to_deliver
-    attr_accessor :primary_image, :extra_images
+    attr_accessor :primary_image, :extra_images, :all_images
     attr_accessor :disabled
 
     def id
