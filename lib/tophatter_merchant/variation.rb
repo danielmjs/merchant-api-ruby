@@ -1,10 +1,10 @@
 module TophatterMerchant
   class Variation < Resource
 
-    attr_accessor :identifier, :size, :color, :quantity
+    attr_accessor :identifier, :size, :color, :quantity, :created_at
 
     def id
-      identifier
+      created_at.present? ? identifier : nil
     end
 
     class << self

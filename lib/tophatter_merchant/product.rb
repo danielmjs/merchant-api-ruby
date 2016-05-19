@@ -10,9 +10,10 @@ module TophatterMerchant
     attr_accessor :ships_from, :estimated_days_to_ship, :estimated_days_to_deliver
     attr_accessor :primary_image, :extra_images, :all_images
     attr_accessor :disabled
+    attr_accessor :created_at
 
     def id
-      identifier
+      created_at.present? ? identifier : nil
     end
 
     def root_category
