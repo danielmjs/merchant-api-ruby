@@ -6,7 +6,7 @@ module TophatterMerchant
     attr_accessor :product_category
     attr_accessor :product_variations
     # attr_accessor :product_brand, :product_model
-    attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price, :shipping_price, :shipping_price_other
+    attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price, :shipping_price
     attr_accessor :ships_from, :estimated_days_to_ship, :estimated_days_to_deliver
     attr_accessor :primary_image, :extra_images, :all_images
     attr_accessor :disabled
@@ -16,31 +16,21 @@ module TophatterMerchant
       created_at.present? ? identifier : nil
     end
 
-    def root_category
-      product_category.to_s.split(' | ').first
+    def sizes(available)
+      if product_category.present?
+        taxonomy = product_category.to_s.split(' | ')
+        available[taxonomy.second] || available[taxonomy.first]
+      else
+        []
+      end
     end
 
-    def fill!
-      self.title = 'Foo'
-      self.description = 'Bar'
-      self.product_condition = 'New'
-      self.product_category = 'Other | Other'
-      self.minimum_bid_amount = 1
-      self.buy_now_price = 10
-      self.retail_price = 20
-      self.shipping_price = 3
-      self.shipping_price_other = 10
-      self.ships_from = 'China'
-      self.estimated_days_to_ship = 3
-      self.estimated_days_to_deliver = 10
-      self.product_variations = [
-        { size: nil, color: 'Red', identifier: 'FOOBAR-R', quantity: 10 }.with_indifferent_access,
-        { size: nil, color: 'Blue', identifier: 'FOOBAR-B', quantity: 10 }.with_indifferent_access,
-        { size: nil, color: 'Pink', identifier: 'FOOBAR-P', quantity: 10 }.with_indifferent_access
-      ]
-      self.primary_image = 'https://img0.etsystatic.com/101/0/7856452/il_fullxfull.882030160_r0tn.jpg'
-      self.extra_images = ['https://img1.etsystatic.com/104/0/7856452/il_fullxfull.881791367_26vj.jpg']
-      self
+    def images(size: 'square')
+      if persisted?
+        all_images.collect { |image| image['square'] }
+      else
+        ([primary_image] + extra_images.to_s.split('|')).compact
+      end
     end
 
     class << self
@@ -75,7 +65,7 @@ module TophatterMerchant
       def disable(id)
         Product.new post(url: "#{path}/disable.json", params: { identifier: id })
       end
-      
+
       # ap TophatterMerchant::Product.enable('FOOBAR').to_h
       def enable(id)
         Product.new post(url: "#{path}/enable.json", params: { identifier: id })
