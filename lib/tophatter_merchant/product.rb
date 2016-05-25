@@ -17,7 +17,10 @@ module TophatterMerchant
     def sizes(available)
       if product_category.present?
         taxonomy = product_category.to_s.split(' | ')
-        available[taxonomy.second] || available[taxonomy.first]
+        taxonomy.reverse.each do |key|
+          return available[key] if available[key].present?
+        end
+        []
       else
         []
       end
