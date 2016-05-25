@@ -5,12 +5,10 @@ module TophatterMerchant
     attr_accessor :title, :description, :product_condition
     attr_accessor :product_category
     attr_accessor :product_variations
-    # attr_accessor :product_brand, :product_model
     attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price, :shipping_price
     attr_accessor :ships_from, :estimated_days_to_ship, :estimated_days_to_deliver
     attr_accessor :primary_image, :extra_images, :all_images
-    attr_accessor :disabled
-    attr_accessor :created_at
+    attr_accessor :created_at, :disabled_at
 
     def id
       created_at.present? ? identifier : nil
@@ -41,8 +39,8 @@ module TophatterMerchant
       end
 
       # ap TophatterMerchant::Product.all.map(&:to_h)
-      def all(page: 1, per_page: 50)
-        get(url: "#{path}.json", params: { page: page, per_page: per_page }).map do |hash|
+      def all(page: 1, per_page: 50, status: nil)
+        get(url: "#{path}.json", params: { page: page, per_page: per_page, status: status }).map do |hash|
           Product.new(hash)
         end
       end

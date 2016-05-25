@@ -23,12 +23,8 @@ module TophatterMerchant
       end
     end
 
-    def attributes
-      self.class.attributes
-    end
-
     def to_h
-      attributes.collect { |key| [key, send(key)] }.compact.to_h
+      self.class.attributes.keys.collect { |key| [key, send(key)] }.to_h
     end
 
     def persisted?
@@ -38,12 +34,13 @@ module TophatterMerchant
     private
 
     def self.attributes
-      @attributes || []
+      @attributes || {}
     end
 
     def self.attributes!(*vars)
-      @attributes ||= []
-      @attributes.concat(vars.map(&:to_s))
+      @attributes ||= {}
+      vars.map(&:to_s).each { |var| @attributes[var] = true }
+      @attributes
     end
 
     class << self
