@@ -72,6 +72,10 @@ module TophatterMerchant
         Product.new post(url: "#{path}/enable.json", params: { identifier: id })
       end
 
+      def upload(file, template:)
+        Product.new post(url: "#{path}/upload.json", params: { file: file, template: template })
+      end
+
       protected
 
       def path
