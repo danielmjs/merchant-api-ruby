@@ -2,7 +2,7 @@ module TophatterMerchant
   class Product < Resource
 
     attr_accessor :identifier
-    attr_accessor :title, :description, :product_condition
+    attr_accessor :title, :description, :product_condition, :product_brand
     attr_accessor :product_category
     attr_accessor :product_variations
     attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price, :shipping_price
