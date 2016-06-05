@@ -2,8 +2,7 @@ module TophatterMerchant
   class Product < Resource
 
     attr_accessor :identifier
-    attr_accessor :title, :description, :product_condition
-    attr_accessor :product_category
+    attr_accessor :product_category, :title, :description, :product_condition
     attr_accessor :product_variations
     attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price, :shipping_price
     attr_accessor :ships_from, :estimated_days_to_ship, :estimated_days_to_deliver
@@ -14,21 +13,9 @@ module TophatterMerchant
       created_at.present? ? identifier : nil
     end
 
-    def sizes(available)
-      if product_category.present?
-        taxonomy = product_category.to_s.split(' | ')
-        taxonomy.reverse.each do |key|
-          return available[key] if available[key].present?
-        end
-        []
-      else
-        []
-      end
-    end
-
     def images(size: 'square')
       if persisted?
-        all_images.collect { |image| image['square'] }
+        all_images.collect { |image| image[size] }
       else
         ([primary_image] + extra_images.to_s.split('|')).compact
       end
