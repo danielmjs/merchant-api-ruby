@@ -38,6 +38,8 @@ module TophatterMerchant
         else
           result.map { |hash| Product.new(hash) }
         end
+
+        result
       end
 
       def retrieve(id)
