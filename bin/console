@@ -6,10 +6,10 @@ require 'tophatter_merchant'
 require 'awesome_print'
 require 'pry'
 
-TophatterMerchant.api_path = 'http://localhost/merchant_api/v1'
-account = TophatterMerchant::Account.authenticate(email: 'megatron@autobot.com', password: 'ipipip')
-TophatterMerchant.access_token = account.access_token
-puts "Welcome, #{account.store_name}"
+# TophatterMerchant.api_path = 'http://localhost:3001/merchant_api/v1'
+# account = TophatterMerchant::Account.authenticate(email: 'megatron@autobot.com', password: 'ipipip')
+# TophatterMerchant.access_token = account.access_token
+# puts "Welcome, #{account.store_name}"
 
 Pry.config.color = false
 Pry.start

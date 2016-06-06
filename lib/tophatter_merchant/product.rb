@@ -34,7 +34,7 @@ module TophatterMerchant
         result = get(url: "#{path}.json", params: { page: page, per_page: per_page, status: status, pagination: pagination })
 
         if pagination.present?
-          result['results'].map { |hash| Product.new(hash) }
+          result['results'] = result['results'].map { |hash| Product.new(hash) }
         else
           result.map { |hash| Product.new(hash) }
         end
