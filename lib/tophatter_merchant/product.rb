@@ -4,8 +4,8 @@ module TophatterMerchant
     attr_accessor :identifier
     attr_accessor :product_category, :title, :description, :product_brand, :product_condition # Basics
     attr_accessor :product_variations # Variations
-    attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price, :shipping_price # Pricing
-    attr_accessor :ships_from, :estimated_days_to_ship, :estimated_days_to_deliver # Shiping
+    attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price # Pricing
+    attr_accessor :ships_from, :shipping_price, :expedited_shipping_price, :estimated_days_to_ship, :estimated_days_to_deliver, :expedited_days_to_deliver # Shiping
     attr_accessor :primary_image, :extra_images, :all_images # Images
     attr_accessor :created_at, :disabled_at # Timestamps
 
