@@ -7,7 +7,7 @@ module TophatterMerchant
     attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price # Pricing
     attr_accessor :ships_from, :shipping_price, :expedited_shipping_price, :estimated_days_to_ship, :estimated_days_to_deliver, :expedited_days_to_deliver # Shiping
     attr_accessor :primary_image, :extra_images, :all_images # Images
-    attr_accessor :created_at, :disabled_at # Timestamps
+    attr_accessor :created_at, :updated_at, :disabled_at # Timestamps
 
     def id
       created_at.present? ? identifier : nil
@@ -30,8 +30,8 @@ module TophatterMerchant
       end
 
       # ap TophatterMerchant::Product.all.map(&:to_h)
-      def all(page: 1, per_page: 50, status: nil, pagination: nil)
-        result = get(url: "#{path}.json", params: { page: page, per_page: per_page, status: status, pagination: pagination })
+      def all(status: nil, page: 1, per_page: 50, pagination: nil, sort: nil)
+        result = get(url: "#{path}.json", params: { status: status, page: page, per_page: per_page, pagination: pagination, sort: sort })
 
         if pagination.present?
           result['results'] = result['results'].map { |hash| Product.new(hash) }
