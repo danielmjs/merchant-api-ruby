@@ -24,7 +24,7 @@ module TophatterMerchant
     end
 
     def to_param
-      slug
+      slug || identifier
     end
 
     class << self
