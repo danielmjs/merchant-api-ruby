@@ -2,7 +2,8 @@ module TophatterMerchant
   class Product < Resource
 
     attr_accessor :identifier
-    attr_accessor :product_category, :title, :description, :product_brand, :product_condition # Basics
+    attr_accessor :product_category, :title, :description # Basics
+    attr_accessor :product_condition, :product_brand, :product_material
     attr_accessor :product_variations # Variations
     attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price # Pricing
     attr_accessor :ships_from, :shipping_price, :expedited_shipping_price, :estimated_days_to_ship, :estimated_days_to_deliver, :expedited_days_to_deliver # Shiping
