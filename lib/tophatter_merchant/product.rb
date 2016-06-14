@@ -69,6 +69,11 @@ module TophatterMerchant
         Product.new post(url: "#{path}/update.json", params: data.merge(identifier: id))
       end
 
+      # ap TophatterMerchant::Product.delete('FOOBAR').to_h
+      def delete(id)
+        Product.new post(url: "#{path}/delete.json", params: { identifier: id })
+      end
+
       # ap TophatterMerchant::Product.disable('FOOBAR').to_h
       def disable(id)
         Product.new post(url: "#{path}/disable.json", params: { identifier: id })
