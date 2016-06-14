@@ -24,6 +24,18 @@ module TophatterMerchant
       end
     end
 
+    def copy
+      attributes = to_h
+
+      # Delete the attributes that shouldn't be copied.
+      %w(identifier primary_image extra_images all_images created_at updated_at disabled_at deleted_at).each do |attribute|
+        attributes.delete(attribute)
+        attributes['product_variations'].each { |variation| variation.delete(attribute) }
+      end
+
+      Product.new(attributes)
+    end
+
     def to_param
       slug || identifier
     end
