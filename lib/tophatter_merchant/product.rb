@@ -5,7 +5,7 @@ module TophatterMerchant
     attr_accessor :product_category, :title, :description # Basics
     attr_accessor :product_condition, :product_brand, :product_material # Facets
     attr_accessor :product_variations # Variations
-    attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price # Pricing
+    attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price, :cost_basis # Pricing
     attr_accessor :ships_from, :shipping_price, :expedited_shipping_price, :estimated_days_to_ship, :estimated_days_to_deliver, :expedited_days_to_deliver # Shipping
     attr_accessor :primary_image, :extra_images, :all_images # Images
     attr_accessor :created_at, :updated_at, :disabled_at, :deleted_at # Timestamps
@@ -22,6 +22,18 @@ module TophatterMerchant
       else
         ([primary_image] + extra_images.to_s.split('|')).compact
       end
+    end
+
+    def copy
+      attributes = to_h
+
+      # Delete the attributes that shouldn't be copied.
+      %w(identifier primary_image extra_images all_images created_at updated_at disabled_at deleted_at).each do |attribute|
+        attributes.delete(attribute)
+        attributes['product_variations'].each { |variation| variation.delete(attribute) }
+      end
+
+      Product.new(attributes)
     end
 
     def to_param
