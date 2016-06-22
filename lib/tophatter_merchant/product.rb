@@ -2,11 +2,11 @@ module TophatterMerchant
   class Product < Resource
 
     attr_accessor :identifier
-    attr_accessor :product_category, :title, :description # Basics
-    attr_accessor :product_condition, :product_brand, :product_material # Facets
-    attr_accessor :product_variations # Variations
-    attr_accessor :minimum_bid_amount, :buy_now_price, :retail_price, :cost_basis # Pricing
-    attr_accessor :ships_from, :shipping_price, :expedited_shipping_price, :estimated_days_to_ship, :estimated_days_to_deliver, :expedited_days_to_deliver, :weight # Shipping
+    attr_accessor :category, :title, :description # Basics
+    attr_accessor :condition, :brand, :material # Facets
+    attr_accessor :variations # Variations
+    attr_accessor :starting_bid, :buy_now_price, :retail_price, :cost_basis # Pricing
+    attr_accessor :shipping_origin, :shipping_price, :expedited_shipping_price, :days_to_fulfill, :days_to_deliver, :expedited_days_to_deliver, :weight # Shipping
     attr_accessor :primary_image, :extra_images, :all_images # Images
     attr_accessor :created_at, :updated_at, :disabled_at, :deleted_at # Timestamps
     attr_accessor :slug
@@ -30,7 +30,7 @@ module TophatterMerchant
       # Delete the attributes that shouldn't be copied.
       %w(identifier primary_image extra_images all_images created_at updated_at disabled_at deleted_at).each do |attribute|
         attributes.delete(attribute)
-        attributes['product_variations'].each { |variation| variation.delete(attribute) }
+        attributes['variations'].each { |variation| variation.delete(attribute) }
       end
 
       Product.new(attributes)
