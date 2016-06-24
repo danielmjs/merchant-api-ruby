@@ -14,6 +14,7 @@ describe TophatterMerchant::Metadata do
     expect(metadata.keys.include?('provinces')).to be true
     expect(metadata.keys.include?('territories')).to be true
     expect(metadata.keys.include?('carriers')).to be true
+    expect(metadata.keys.include?('brands')).to be true
   end
 
   it 'returns conditions' do

@@ -52,6 +52,11 @@ module TophatterMerchant
         get(url: "#{path}/carriers.json")
       end
 
+      # ap TophatterMerchant::Metadata.brands
+      def brands
+        get(url: "#{path}/brands.json")
+      end
+
       protected
 
       def path
