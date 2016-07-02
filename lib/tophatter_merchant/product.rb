@@ -47,6 +47,23 @@ module TophatterMerchant
         get(url: "#{path}/schema.json")
       end
 
+      def search(query:, page: 1, per_page: 50, pagination: nil)
+        result = get(url: "#{path}/search.json", params: {
+          query: query,
+          page: page,
+          per_page: per_page,
+          pagination: pagination
+        })
+
+        if pagination.present?
+          result['results'] = result['results'].map { |hash| Product.new(hash) }
+        else
+          result.map { |hash| Product.new(hash) }
+        end
+
+        result
+      end
+
       # ap TophatterMerchant::Product.all.map(&:to_h)
       def all(status: nil, category: nil, page: 1, per_page: 50, pagination: nil, sort: nil)
         result = get(url: "#{path}.json", params: {
