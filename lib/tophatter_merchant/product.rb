@@ -2,7 +2,7 @@ module TophatterMerchant
   class Product < Resource
 
     attr_accessor :identifier
-    attr_accessor :category, :title, :description # Basics
+    attr_accessor :category, :title, :description, :blacklisted_lot # Basics
     attr_accessor :condition, :brand, :material # Facets
     attr_accessor :variations # Variations
     attr_accessor :starting_bid, :buy_now_price, :retail_price, :cost_basis # Pricing
@@ -28,7 +28,7 @@ module TophatterMerchant
       attributes = to_h
 
       # Delete the attributes that shouldn't be copied.
-      %w(identifier primary_image extra_images all_images created_at updated_at disabled_at deleted_at).each do |attribute|
+      %w(identifier primary_image extra_images all_images created_at updated_at disabled_at deleted_at blacklisted_lot).each do |attribute|
         attributes.delete(attribute)
         attributes['variations'].each { |variation| variation.delete(attribute) }
       end
