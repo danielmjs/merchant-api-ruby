@@ -2,14 +2,15 @@ module TophatterMerchant
   class Product < Resource
 
     attr_accessor :identifier
-    attr_accessor :category, :title, :description, :blacklisted_lot # Basics
+    attr_accessor :category, :title, :description # Basics
     attr_accessor :condition, :brand, :material # Facets
-    attr_accessor :variations # Variations
+    attr_accessor :available_quantity, :variations # Variations
     attr_accessor :starting_bid, :buy_now_price, :retail_price, :cost_basis # Pricing
     attr_accessor :shipping_origin, :shipping_price, :expedited_shipping_price, :days_to_fulfill, :days_to_deliver, :expedited_days_to_deliver, :weight # Shipping
     attr_accessor :primary_image, :extra_images, :all_images # Images
-    attr_accessor :created_at, :updated_at, :disabled_at, :deleted_at # Timestamps
-    attr_accessor :slug, :available_quantity, :ratings_average, :ratings_count
+    attr_accessor :slug, :ratings_average, :ratings_count # Ratings
+    attr_accessor :created_at, :updated_at, :disabled_at, :deleted_at, :blacklisted_at # Timestamps
+    attr_accessor :slug # Other
 
     def id
       created_at.present? ? identifier : nil
@@ -28,7 +29,7 @@ module TophatterMerchant
       attributes = to_h
 
       # Delete the attributes that shouldn't be copied.
-      %w(identifier primary_image extra_images all_images created_at updated_at disabled_at deleted_at blacklisted_lot).each do |attribute|
+      %w(identifier primary_image extra_images all_images ratings_average ratings_count created_at updated_at disabled_at deleted_at blacklisted_at slug).each do |attribute|
         attributes.delete(attribute)
         attributes['variations'].each { |variation| variation.delete(attribute) }
       end
