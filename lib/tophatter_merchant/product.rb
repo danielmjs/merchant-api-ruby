@@ -10,7 +10,7 @@ module TophatterMerchant
     attr_accessor :primary_image, :extra_images, :all_images # Images
     attr_accessor :slug, :ratings_average, :ratings_count # Ratings
     attr_accessor :created_at, :updated_at, :disabled_at, :deleted_at, :blacklisted_at # Timestamps
-    attr_accessor :slug # Other
+    attr_accessor :slug, :internal_id # Other
 
     def id
       created_at.present? ? identifier : nil
