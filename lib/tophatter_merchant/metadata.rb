@@ -57,6 +57,10 @@ module TophatterMerchant
         get(url: "#{path}/brands.json")
       end
 
+      def materials
+        get(url: "#{path}/materials.json")
+      end
+
       protected
 
       def path
