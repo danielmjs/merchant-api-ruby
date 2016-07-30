@@ -7,6 +7,7 @@ module TophatterMerchant
     attr_accessor :available_quantity, :variations # Variations
     attr_accessor :starting_bid, :buy_now_price, :retail_price, :cost_basis # Pricing
     attr_accessor :shipping_origin, :shipping_price, :expedited_shipping_price, :days_to_fulfill, :days_to_deliver, :expedited_days_to_deliver, :weight # Shipping
+    attr_accessor :buy_one_get_one_price, :accessory_price, :accessory_description # Upsells
     attr_accessor :primary_image, :extra_images, :all_images # Images
     attr_accessor :slug, :ratings_average, :ratings_count # Ratings
     attr_accessor :created_at, :updated_at, :disabled_at, :deleted_at, :blacklisted_at # Timestamps
