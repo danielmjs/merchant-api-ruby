@@ -61,6 +61,10 @@ module TophatterMerchant
         get(url: "#{path}/materials.json")
       end
 
+      def gemstones
+        get(url: "#{path}/gemstones.json")
+      end
+
       protected
 
       def path
