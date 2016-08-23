@@ -18,6 +18,7 @@ RSpec.configure do |config|
   config.before(:each) do
     stub_request(:get, /.*metadata\.json/).to_return(File.new(File.dirname(__FILE__) + '/../tmp/stubs/metadata.json'))
     stub_request(:get, /.*conditions\.json/).to_return(File.new(File.dirname(__FILE__) + '/../tmp/stubs/metadata/conditions.json'))
+    stub_request(:get, /.*gemstones\.json/).to_return(File.new(File.dirname(__FILE__) + '/../tmp/stubs/metadata/gemstones.json'))
   end
 
 end

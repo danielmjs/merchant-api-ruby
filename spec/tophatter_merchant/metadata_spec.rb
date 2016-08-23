@@ -15,6 +15,8 @@ describe TophatterMerchant::Metadata do
     expect(metadata.keys.include?('territories')).to be true
     expect(metadata.keys.include?('carriers')).to be true
     expect(metadata.keys.include?('brands')).to be true
+    expect(metadata.keys.include?('materials')).to be true
+    expect(metadata.keys.include?('gemstones')).to be true
   end
 
   it 'returns conditions' do
@@ -24,6 +26,13 @@ describe TophatterMerchant::Metadata do
     expect(conditions.include?('New with Defects')).to be true
     expect(conditions.include?('Used')).to be true
     expect(conditions.include?('Refurbished')).to be true
+  end
+
+  it 'returns gemstones' do
+    gemstones = TophatterMerchant::Metadata.gemstones
+    expect(gemstones['Gemstones'].include?('Diamond')).to be true
+    expect(gemstones['Gemstones'].include?('Ruby')).to be true
+    expect(gemstones['Gemstones'].include?("Micheal Jackson's Hair Diamond")).to be false
   end
 
 end
