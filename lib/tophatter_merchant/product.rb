@@ -10,7 +10,7 @@ module TophatterMerchant
     attr_accessor :buy_one_get_one_price, :accessory_price, :accessory_description # Upsells
     attr_accessor :primary_image, :extra_images, :all_images # Images
     attr_accessor :slug, :ratings_average, :ratings_count # Ratings
-    attr_accessor :created_at, :updated_at, :disabled_at, :deleted_at, :blacklisted_at # Timestamps
+    attr_accessor :created_at, :updated_at, :disabled_at, :deleted_at, :blacklisted_at, :admin_hold_at # Timestamps
     attr_accessor :slug, :internal_id # Other
 
     def id
@@ -30,7 +30,7 @@ module TophatterMerchant
       attributes = to_h
 
       # Delete the attributes that shouldn't be copied.
-      %w(identifier primary_image extra_images all_images ratings_average ratings_count created_at updated_at disabled_at deleted_at blacklisted_at slug).each do |attribute|
+      %w(identifier primary_image extra_images all_images ratings_average ratings_count created_at updated_at disabled_at deleted_at blacklisted_at slug admin_hold_at).each do |attribute|
         attributes.delete(attribute)
         attributes['variations'].each { |variation| variation.delete(attribute) }
       end
