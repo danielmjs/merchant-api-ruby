@@ -3,7 +3,7 @@ module TophatterMerchant
 
     attr_accessor :identifier
     attr_accessor :category, :title, :description # Basics
-    attr_accessor :condition, :brand, :material, :gemstone # Facets
+    attr_accessor :condition, :brand, :material # Facets
     attr_accessor :available_quantity, :variations # Variations
     attr_accessor :starting_bid, :buy_now_price, :retail_price, :cost_basis # Pricing
     attr_accessor :shipping_origin, :shipping_price, :expedited_shipping_price, :days_to_fulfill, :days_to_deliver, :expedited_days_to_deliver, :weight # Shipping
